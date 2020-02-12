@@ -5,7 +5,7 @@ import os
 from copy import deepcopy
 
 class DatasetCatalog(object):
-    DATA_DIR = "datasets"
+    DATA_DIR = "/mnt/data/dataset"
     DATASETS = {
         "coco_2017_train": {
             "img_dir": "coco/train2017",
@@ -151,6 +151,14 @@ class DatasetCatalog(object):
             "mode": "mask",
             "mini": 10,
         },
+        "ycb_video_train": {
+            "img_dir": "YCB_Video_Dataset/data",
+            "ann_file": "YCB_Video_Dataset/annotations/instances_train.json"
+        },
+        "ycb_video_val": {
+            "img_dir": "YCB_Video_Dataset/data",
+            "ann_file": "YCB_Video_Dataset/annotations/instances_val.json"
+        },
     }
 
     @staticmethod
@@ -183,6 +191,17 @@ class DatasetCatalog(object):
             attrs["img_dir"] = os.path.join(data_dir, attrs["img_dir"])
             attrs["ann_dir"] = os.path.join(data_dir, attrs["ann_dir"])
             return dict(factory="CityScapesDataset", args=attrs)
+        elif "ycb_video" in name:
+            data_dir = DatasetCatalog.DATA_DIR
+            attrs = DatasetCatalog.DATASETS[name]
+            args = dict(
+                root=os.path.join(data_dir, attrs["img_dir"]),
+                ann_file=os.path.join(data_dir, attrs["ann_file"]),
+            )
+            return dict(
+                factory="YCBVDataset",
+                args=args,
+            )
         raise RuntimeError("Dataset not available: {}".format(name))
 
 

@@ -454,7 +454,7 @@ _C.TEST.BBOX_AUG.SCALE_H_FLIP = False
 # ---------------------------------------------------------------------------- #
 # Misc options
 # ---------------------------------------------------------------------------- #
-_C.OUTPUT_DIR = "."
+_C.OUTPUT_DIR = "./output/<name of config>" #build the dir of this config first
 
 _C.PATHS_CATALOG = os.path.join(os.path.dirname(__file__), "paths_catalog.py")
 

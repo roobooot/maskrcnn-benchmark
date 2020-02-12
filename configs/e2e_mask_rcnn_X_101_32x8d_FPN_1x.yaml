@@ -33,13 +33,13 @@ MODEL:
     SHARE_BOX_FEATURE_EXTRACTOR: False
   MASK_ON: True
 DATASETS:
-  TRAIN: ("coco_2017_train",)
-  TEST: ("coco_2017_val",)
+  TRAIN: ("ycb_video_train",)
+  TEST: ("ycb_video_val",)
 DATALOADER:
   SIZE_DIVISIBILITY: 32
-SOLVER:
-  BASE_LR: 0.01
+SOLVER: # reduce the demand of graphi card memory
+  BASE_LR: 0.0025   #BASE_LR: 0.01
   WEIGHT_DECAY: 0.0001
-  STEPS: (120000, 160000)
-  MAX_ITER: 180000
-  IMS_PER_BATCH: 8
+  STEPS: (480000, 640000) #STEPS: (120000, 160000)
+  MAX_ITER: 720000 #MAX_ITER: 180000
+  IMS_PER_BATCH: 2  #IMS_PER_BATCH: 8
